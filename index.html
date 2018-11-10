@@ -17,7 +17,7 @@
     }
     video {
       background: white;
-      background-image: url(https://www.kirupa.com/images/orange_logo_svg.svg);
+      background-image: url(img/logo-peek-a-mons.jpg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: contain;
@@ -36,10 +36,16 @@
       color: white;
     }
   </style>
+    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />  
 </head>
 <body>
-  <div class="copy">Send your URL to a friend to start a video call</div>
-  <video id="localVideo" autoplay muted></video>
+  <div class="copy">
+    <div id="phase">(phase: hide me)</div>
+    <div id="museumx">(museum: <span id='museum'>hide me</span>)</div>
+    <div id="message">(message: replace me)</div>        
+</div>
+<video id="localVideo" autoplay muted></video>
   <video id="remoteVideo" autoplay></video>
   <script src="script.js"></script>
 </body>
