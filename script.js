@@ -17,7 +17,7 @@ let room;
 let pc;
 
 
-function onSuccess() {};
+function onSuccess() { };
 function onError(error) {
   console.error(error);
 };
@@ -57,7 +57,7 @@ function startWebRTC(isOfferer) {
   // message to the other peer through the signaling server
   pc.onicecandidate = event => {
     if (event.candidate) {
-      sendMessage({'candidate': event.candidate});
+      sendMessage({ 'candidate': event.candidate });
     }
   };
 
@@ -110,7 +110,7 @@ function startWebRTC(isOfferer) {
 function localDescCreated(desc) {
   pc.setLocalDescription(
     desc,
-    () => sendMessage({'sdp': pc.localDescription}),
+    () => sendMessage({ 'sdp': pc.localDescription }),
     onError
   );
 }
