@@ -1,0 +1,58 @@
+body {
+    background: #0098ff;
+    /* display: flex; */
+    height: 100vh;
+    margin: 0;
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 0 50px;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  video {
+    background: white;
+    background-image: url(img/logo-peek-a-mons.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    max-width: calc(50% - 5%);
+    margin: 0 5%;
+    box-sizing: border-box;
+    border-radius: 2px;
+    padding: 0;
+  }
+  .copy {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: white;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .white {
+    color: white;
+  }
+
+  .floatOnTop {
+    position: fixed;
+  }
+
+  .mainVideo {
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .mirrorHoriz {
+    transform: rotateY(180deg);
+  }

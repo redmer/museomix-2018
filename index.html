@@ -4,49 +4,34 @@
   <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <style>
-    body {
-      background: #0098ff;
-      display: flex;
-      height: 100vh;
-      margin: 0;
-      align-items: center;
-      justify-content: center;
-      padding: 0 50px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    video {
-      background: white;
-      background-image: url(img/logo-peek-a-mons.jpg);
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: contain;
-      max-width: calc(50% - 5%);
-      margin: 0 5%;
-      box-sizing: border-box;
-      border-radius: 2px;
-      padding: 0;
-    }
-    .copy {
-      position: fixed;
-      top: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      color: white;
-    }
-  </style>
-    <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />  
+  <link rel="stylesheet" type='text/css' href="styles.css" />
+  <link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="img/favicon-16x16.png" sizes="16x16" />  
 </head>
 <body>
-  <div class="copy">
-    <div id="phase">(phase: hide me)</div>
-    <div id="museumx">(museum: <span id='museum'>hide me</span>)</div>
-    <div id="message">(message: replace me)</div>        
-</div>
-<video id="localVideo" autoplay muted></video>
-  <video id="remoteVideo" autoplay></video>
-  <script src="script.js"></script>
+  <div class='column white'>
+      <div class='videoContainer'>
+        <video class='mainVideo mirrorHoriz' id="remoteVideo" autoplay muted></video>
+        <div class='floatOnTop'>
+          <span id='announceLabel' class='big'>Announcement</span>
+        </div>
+        <ul id='debugLabels' class='floatOnTop w50 small'>
+          <li><strong>Debugging (hide for production)</strong></li>
+          <li><strong>Phase:</strong><span id='phase'>phase</span></li>
+          <li><strong>Museum:</strong><span id='museum'>replace</span></li>
+          <li><strong>Message:</strong><span id='message'>replace</span></li>
+        </ul>
+      </div>
+      <div class='row'>
+        <button id='presenceToggleA' class=''>Toggle presence A</button>
+        <div class='column'>
+          <div class='big'>Time remaining/Temps restante</div>
+          <div id='timeRemaining'>1:50</div>
+        </div>
+        <button id='presenceToggleB' class=''>Toggle presence B</button>
+      </div>
+  </div>
+  <video id="localVideo" autoplay muted></video>
+<script src="script.js"></script>
 </body>
 </html>
