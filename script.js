@@ -1,11 +1,12 @@
 // Generate random room name if needed
-if (!location.hash) {
-  location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-}
-const roomHash = location.hash.substring(1);
+// if (!location.hash) {
+//   location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
+// }
+// const roomHash = location.hash.substring(1);
 
-// TODO: Replace with your own channel ID
-const drone = new ScaleDrone('2xmbUiTsqTzukyf7');
+const roomHash = '44a5eb';
+
+const drone = new ScaleDrone('2xmbUiTsqTzukyf7'); // my own, remove for publication
 // Room name needs to be prefixed with 'observable-'
 const roomName = 'observable-' + roomHash;
 const configuration = {
@@ -16,8 +17,113 @@ const configuration = {
 let room;
 let pc;
 
+const SCENES = [
+  {
+    msg: "👀 Looking for another player…",
+    timeout: 30, // seconds
+  },
+  {
+    msg: "✅ Accepting the challenge…",
+    timeout: 5, // seconds
+  },
+  {
+    msg: "📯 Start!",
+    timeout: 90, // seconds
+  },
+  {
+    msg: "👏 You did great! Now do something silly!",
+    timeout: 15, // seconds
+  },
+  {
+    msg: "👋 Wave hi",
+    timeout: 60, // seconds
+  }
+]
 
+let CURRENT_SCENE_OBJ = {}
+let CURRENT_SCENE_IDX = 0
+let TIME_LEFT_IN_SCENE = -1;
+
+
+function runtime() {
+  // start timer
+  goToScene(SCENES[CURRENT_SCENE_IDX]);
+};
+
+
+function updateTimeLeft() {
+  if (TIME_LEFT_IN_SCENE < 60) {
+    var minutes = 0;
+    var seconds = TIME_LEFT_IN_SCENE;
+  } else {
+    var minutes = Math.floor(TIME_LEFT_IN_SCENE / 60 );
+    var seconds = (TIME_LEFT_IN_SCENE % 60 );
+  } 
+
+  if (seconds < 10) {
+    var secondsStr = '0' + seconds.toString();
+  } else {
+    var secondsStr = seconds.toString();
+  }
+
+  var timeStr = minutes.toString() + ':' + secondsStr;
+
+  document.querySelector('#timeRemaining').textContent = timeStr;
+  if (TIME_LEFT_IN_SCENE > 0) {
+    // console.log('Time left in scene: ' + TIME_LEFT_IN_SCENE);
+    setTimeout(updateTimeLeft, 1 * 1000); // update 4x per second
+    TIME_LEFT_IN_SCENE = TIME_LEFT_IN_SCENE - 1;
+
+    if (TIME_LEFT_IN_SCENE < 1) {
+      clearTimeout(updateTimeLeft);
+    }
+  } else {
+    // console.log('No time left in scene: ' + TIME_LEFT_IN_SCENE);
+    clearTimeout(updateTimeLeft);
+  }
+};
+
+function setMessage(msg, lang) {
+  if (lang === 'en') {
+    var selector = '#announceLabelEN';
+  } else {
+    var selector = '#announceLabelFR';
+  }
+
+  document.querySelector(selector).textContent = msg;
+}
+
+function sceneEnded() {
+  nextSceneIdx = CURRENT_SCENE_IDX + 1;
+  if (nextSceneIdx == SCENES.length) {
+    CURRENT_SCENE_IDX = 0;
+  } else {
+    CURRENT_SCENE_IDX = nextSceneIdx;
+  }
+
+  goToScene(SCENES[CURRENT_SCENE_IDX]);
+}
+
+function setSceneTimeout(timeout) {
+  setTimeout(sceneEnded, (timeout * 1000) + 1000); 
+  
+  // also set the visible timer
+  TIME_LEFT_IN_SCENE = timeout;
+  updateTimeLeft()
+}
+
+function goToScene(scene) {
+  CURRENT_SCENE_OBJ = scene
+
+  setMessage(scene.msg, 'en');
 function onSuccess() { };
+  setSceneTimeout(scene.timeout);
+};
+
+function onSuccess() { 
+  runtime();
+};
+
 function onError(error) {
   console.error(error);
 };
@@ -78,7 +184,8 @@ function startWebRTC(isOfferer) {
     video: true,
   }).then(stream => {
     // Display your local video in #localVideo element
-    localVideo.srcObject = stream;
+    // localVideo.srcObject = stream;
+    // remoteVideo.srcObject = stream;
     // Add your stream to be sent to the conneting peer
     pc.addStream(stream);
   }, onError);
@@ -114,3 +221,5 @@ function localDescCreated(desc) {
     onError
   );
 }
+
+runtime();

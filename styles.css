@@ -1,14 +1,17 @@
 body {
-    background: #0098ff;
-    /* display: flex; */
-    height: 100vh;
+    background: black;
+    height: 100%;
     margin: 0;
     /* align-items: center; */
     /* justify-content: center; */
-    padding: 0 50px;
+    padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+.attachBottom {
+    position: absolute;
+    bottom: 0;
+}
 video {
     background: white;
     background-image: url(img/logo-peek-a-mons.jpg);
@@ -16,16 +19,42 @@ video {
     background-position: center;
     background-size: contain;
     max-width: calc(50% - 5%);
-    margin: 0 5%;
+    /* margin: 0 5%; */
     box-sizing: border-box;
-    border-radius: 2px;
+    /* border-radius: 2px; */
     padding: 0;
 }
 
+.videoContainer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 80%;
+    height: 100%; 
+    overflow: hidden;
+}
 
 .spicy {
     font-family: 'spicy_riceregular', georgia;
 }
+
+.videoContainer video {
+    /* Make video to at least 100% wide and tall */
+    min-width: 100%; 
+    min-height: 100%; 
+  
+    /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+    width: auto;
+    height: auto;
+
+    object-fit: cover;
+  
+    /* Center the video */
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* transform: translate(-50%,-50%); */
+}  
 
 .copy {
     position: fixed;
@@ -36,30 +65,35 @@ video {
     color: white;
 }
 
-.column {
-    display: flex;
-    flex-direction: column;
-}
-
-.row {
-    display: flex;
-    flex-direction: row;
-}
-
-.white {
-    color: white;
-}
-
 .floatOnTop {
     position: fixed;
+}
+
+.center-when-flipped {
+    right: 0pt;
+    bottom: 45%;
+}
+
+.center-when-flipped2 {
+    left: 0pt;
+    bottom: 45%;
 }
 
 .mainVideo {
     width: 100%;
     height: 100%;
-    rotateZ(90deg)
+    /* transform: translate(-50%,-50%) rotateY(180deg) rotateZ(90deg); */
+    /* transform: translate(-50%,-50%) rotateZ(90deg); */
+}
+
+.flip {
+    transform: rotateZ(90deg);
 }
 
 .mirrorHoriz {
     transform: rotateY(180deg);
+}
+
+.upside-down {
+    /* transform: rotate(180deg); */
 }

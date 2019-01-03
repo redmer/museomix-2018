@@ -9,6 +9,9 @@
         content="width=device-width">
   <link rel="stylesheet"
         type='text/css'
+            href="tachyons.min.css" />
+      <link rel="stylesheet"
+            type='text/css'
         href="styles.css" />
   <link rel="icon"
         type="image/png"
@@ -24,39 +27,49 @@
             charset="utf-8" />
 </head>
 
-<body>
-  <div class='column white'>
+<body class='container flex flex-row justify-between'>
+      <div class='container row spread min-vh-100'
+           style='flex-basis: 20%;'>
+            <div class='flip center-when-flipped2 floatOnTop tc'>
+                  <!-- The bottom -->
+                  <div class='big  f2'>
+                        <span class='light'
+                              lang='fr'>Temps restant</span>
+                        <span class='light'
+                              lang='en'>Time remaining</span>
+                  </div>
+                  <div id='timeRemaining'
+                       class='white f1'>1:50</div>
+            </div>
+      </div>
+      <div class='column min-vh-100'
+           style='flex-basis: 80%;'>
     <div class='videoContainer'>
-      <video class='mainVideo mirrorHoriz'
+                  <video class='mainVideo'
              id="remoteVideo"
              autoplay
              muted></video>
-      <div class='floatOnTop'>
-        <span id='announceLabel'
-              class='big'>Announcement</span>
+            </div>
+            <div class='floatOnTop center-when-flipped'>
+                  <div class='f2 flip row spicy'>
+                        <div lang='fr'
+                             class='dark'
+                             id='announceLabelFR'>Announcement FR</div>
+                        <div lang='en'
+                             class='dark'
+                             id='announceLabelEN'>Announcement EN</div>
+                  </div>
       </div>
-      <ul id='debugLabels'
-          class='floatOnTop w50 small'>
-        <li><strong>Debugging (hide for production)</strong></li>
+            <ul hidden lang='en'
+                id='debugLabels'
+                class='w-50 f6 dark'
+                style='z-index: 90000000;
+        position: fixed;'>
         <li><strong>Phase:</strong><span id='phase'>phase</span></li>
         <li><strong>Museum:</strong><span id='museum'>replace</span></li>
         <li><strong>Message:</strong><span id='message'>replace</span></li>
       </ul>
     </div>
-    <div class='row'>
-      <button id='presenceToggleA'
-              class=''>Toggle presence A</button>
-      <div class='column'>
-        <div class='big'>Time remaining/Temps restante</div>
-        <div id='timeRemaining'>1:50</div>
-      </div>
-      <button id='presenceToggleB'
-              class=''>Toggle presence B</button>
-    </div>
-  </div>
-  <video id="localVideo"
-         autoplay
-         muted></video>
   <script src="script.js"></script>
 </body>
 
