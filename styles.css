@@ -22,6 +22,11 @@ video {
     padding: 0;
 }
 
+
+.spicy {
+    font-family: 'spicy_riceregular', georgia;
+}
+
 .copy {
     position: fixed;
     top: 25px;
