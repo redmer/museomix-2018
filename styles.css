@@ -12,6 +12,24 @@ body {
     position: absolute;
     bottom: 0;
 }
+
+.dark:lang(en) {
+    color: #222;
+}
+
+.light:lang(fr) {
+    color: #fff;
+}
+
+.light:lang(en) {
+    color: #ddd;
+}
+
+.dark:lang(fr) {
+    color: #000;
+}
+
+
 video {
     background: white;
     background-image: url(img/logo-peek-a-mons.jpg);

@@ -20,22 +20,27 @@ let pc;
 const SCENES = [
   {
     msg: "👀 Looking for another player…",
+    msgFr: "A la recherche d'un autre joueur...",
     timeout: 30, // seconds
   },
   {
     msg: "✅ Accepting the challenge…",
+    msgFr: "Challenge accepté",
     timeout: 5, // seconds
   },
   {
     msg: "📯 Start!",
+    msgFr: "Start!",
     timeout: 90, // seconds
   },
   {
     msg: "👏 You did great! Now do something silly!",
+    msgFr: "Bien joué! Maintenant, éclate-toi ;)",
     timeout: 15, // seconds
   },
   {
     msg: "👋 Wave hi",
+    msgFr: "Fais Coucou",
     timeout: 60, // seconds
   }
 ]
@@ -116,7 +121,7 @@ function goToScene(scene) {
   CURRENT_SCENE_OBJ = scene
 
   setMessage(scene.msg, 'en');
-function onSuccess() { };
+  setMessage(scene.msgFr, 'fr');
   setSceneTimeout(scene.timeout);
 };
 
